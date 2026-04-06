@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Merriweather', Georgia, serif;
+
+    --color-primary-50:  #f0fdf4;
+    --color-primary-100: #dcfce7;
+    --color-primary-200: #bbf7d0;
+    --color-primary-300: #86efac;
+    --color-primary-400: #4ade80;
+    --color-primary-500: #22c55e;
+    --color-primary-600: #16a34a;
+    --color-primary-700: #15803d;
+    --color-primary-800: #166534;
+    --color-primary-900: #14532d;
+    --color-primary-950: #052e16;
+}
+
+/* ───────────── Base ───────────── */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-sans);
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+/* ───────────── Scrollbar ───────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #166534; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #14532d; }
+
+/* ───────────── Animations ───────────── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes slideRight {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(22,101,52,0.4); }
+    50%       { box-shadow: 0 0 0 10px rgba(22,101,52,0); }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+}
+@keyframes scrollMarquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-fade-up   { animation: fadeUp 0.7s ease both; }
+.animate-fade-in   { animation: fadeIn 0.6s ease both; }
+.animate-slide-right { animation: slideRight 0.7s ease both; }
+.animate-float     { animation: float 3s ease-in-out infinite; }
+.animate-pulse-green { animation: pulse-green 2s infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ───────────── Hero gradient overlay ───────────── */
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(5,46,22,0.92) 0%, rgba(20,83,45,0.80) 50%, rgba(22,101,52,0.70) 100%);
+}
+
+/* ───────────── Card hover lift ───────────── */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(22,101,52,0.15);
+}
+
+/* ───────────── Green underline decoration ───────────── */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #166534, #4ade80);
+    border-radius: 2px;
+    margin-top: 12px;
+}
+.section-title-center::after {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ───────────── Doctor Card Carousel ───────────── */
+.doctor-carousel { overflow: hidden; }
+.doctor-track {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ───────────── FAQ Accordion ───────────── */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-answer.open {
+    max-height: 500px;
+    padding-top: 0.75rem;
+    padding-bottom: 1rem;
+}
+
+/* ───────────── Testimonial Stars ───────────── */
+.star-gold { color: #f59e0b; }
+
+/* ───────────── Stat counter ───────────── */
+.stat-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+    border: 1px solid #dcfce7;
+}
+
+/* ───────────── Marque ticker ───────────── */
+.marquee-container { overflow: hidden; }
+.marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: scrollMarquee 30s linear infinite;
+}
+
+/* ───────────── Green gradient button ───────────── */
+.btn-green {
+    background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(22,101,52,0.3);
+}
+.btn-green:hover {
+    background: linear-gradient(135deg, #14532d 0%, #166534 100%);
+    box-shadow: 0 6px 20px rgba(22,101,52,0.45);
+    transform: translateY(-2px);
+}
+
+/* ───────────── Outline green button ───────────── */
+.btn-outline-green {
+    border: 2px solid #166534;
+    color: #166534;
+    transition: all 0.3s ease;
+}
+.btn-outline-green:hover {
+    background: #166534;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(22,101,52,0.3);
+}
+
+/* ───────────── Sticky nav shadow ───────────── */
+.nav-scrolled {
+    background: rgba(255,255,255,0.97) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 2px 20px rgba(22,101,52,0.12);
+}
+
+/* ───────────── Map embed ───────────── */
+.map-embed { border: 3px solid #166534; border-radius: 12px; overflow: hidden; }
+
+/* ───────────── Section backgrounds ───────────── */
+.bg-section-alt { background: linear-gradient(180deg, #f0fdf4 0%, #f8fafc 100%); }
+.bg-visi { background: linear-gradient(135deg, #14532d 0%, #166534 100%); }
+
+/* ───────────── Nilai icon wrapper ───────────── */
+.nilai-icon-wrap {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dcfce7;
+    border-radius: 16px;
+    transition: background 0.3s, transform 0.3s;
+}
+.nilai-icon-wrap:hover {
+    background: #166534;
+    transform: rotate(-5deg) scale(1.1);
+}
+.nilai-icon-wrap:hover svg { color: #ffffff; }
+
+/* ───────────── Available badge ───────────── */
+.badge-available {
+    background: #dcfce7;
+    color: #166534;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid #86efac;
+}
+.badge-unavailable {
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid #fca5a5;
+}
+
+/* ───────────── Mobile menu ───────────── */
+.mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+.mobile-menu.open { max-height: 600px; }
