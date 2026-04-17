@@ -1,5 +1,5 @@
-@import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+@import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -9,6 +9,7 @@
 @theme {
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'Merriweather', Georgia, serif;
+
 
     --color-primary-50:  #f0fdf4;
     --color-primary-100: #dcfce7;
@@ -28,8 +29,15 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-sans);
-    background-color: #f8fafc;
+    background-color: #f2faf5;
     color: #1e293b;
+}
+
+/* ───────────── Global Container Override ───────────── */
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px !important;
+    }
 }
 
 /* ───────────── Scrollbar ───────────── */
@@ -62,6 +70,28 @@ body {
 @keyframes scrollMarquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+    100% { left: 100%; }
+}
+@keyframes shimmer-slide {
+    0%   { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateX(400%) skewX(-20deg); opacity: 0; }
+}
+.shimmer-auto {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-auto::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 35%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
+    animation: shimmer-slide 2.4s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .animate-fade-up   { animation: fadeUp 0.7s ease both; }

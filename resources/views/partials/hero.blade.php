@@ -1,94 +1,155 @@
-<!-- Section 2: Hero Section -->
-<section id="beranda" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden overflow-x-hidden min-h-[90vh] flex items-center">
-    <!-- Background elements -->
-    <div class="absolute inset-0 z-0">
-        <!-- Main background image (simulated with placeholder/gradient for now) -->
-        <div class="absolute inset-0 bg-slate-50"></div>
-        <div class="absolute right-0 top-0 w-1/2 h-full opacity-60 rounded-l-full bg-emerald-100 blur-3xl transform translate-x-1/4"></div>
-        <div class="absolute -left-10 bottom-0 w-96 h-96 opacity-40 rounded-full bg-emerald-200 blur-3xl"></div>
+<!-- Section 2: Hero — Light Modern Military -->
+<section id="beranda" class="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden">
+
+    <!-- Soft Ambient Glows -->
+    <div
+        class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-200/30 rounded-full blur-3xl -translate-y-1/4 translate-x-1/4 z-0 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 z-0 pointer-events-none">
     </div>
 
-    <div class="container mx-auto px-4 md:px-6 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            
-            <!-- Hero Content -->
-            <div class="max-w-2xl reveal mx-auto lg:mx-0 text-center lg:text-left">
-                <!-- Tag -->
-                <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full font-medium text-sm mb-6 animate-fade-in">
-                    <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse-green"></span>
-                    Rumah Sakit Terpercaya di Palu
-                </div>
-                
-                <!-- Headline -->
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-800 leading-[1.1] mb-6 font-serif">
-                    Kesehatan Anda, <br class="hidden md:block"/>Prioritas Kami
-                </h2>
-                
-                <!-- Body Text -->
-                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                    Memberikan pelayanan kesehatan komprehensif, paripurna, dan terpercaya untuk masyarakat Palu dan sekitarnya dengan fasilitas modern serta tenaga medis profesional.
-                </p>
-                
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <button class="btn-green text-white px-8 py-3.5 rounded-full font-semibold text-lg flex items-center justify-center gap-2">
-                        Daftar Sekarang
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </button>
-                    <a href="#layanan" class="btn-outline-green px-8 py-3.5 rounded-full font-semibold text-lg flex items-center justify-center">
-                        Lihat Layanan
-                    </a>
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 xl:gap-16 items-center">
+
+            <!-- ───── Left: Text Content ───── -->
+            <div class="lg:col-span-6 reveal">
+                <!-- Badge -->
+                <div
+                    class="inline-flex items-center gap-3 bg-white text-emerald-800 text-[10px] font-bold tracking-widest px-5 py-2.5 rounded-full mb-8 border border-emerald-100 shadow-sm">
+                    <span
+                        class="rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse inline-block"
+                        style="width:8px;height:8px;"></span>
+                    Akreditasi UTAMA (LAFKI) &amp; Member TTE (BSrE)
                 </div>
 
-                <!-- Akses Cepat Quick Links -->
-                <div class="mt-12 pt-8 border-t border-gray-200">
-                    <p class="text-sm text-gray-500 font-medium mb-4 uppercase tracking-wider">Akses Cepat</p>
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-6">
-                        <a href="#dokter" class="group flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-emerald-800 transition-colors">Jadwal Dokter</span>
-                        </a>
-                        <a href="#" class="group flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-emerald-800 transition-colors">Fasilitas RS</span>
-                        </a>
-                        <a href="#faq" class="group flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-100 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-emerald-800 transition-colors">Pusat Bantuan</span>
-                        </a>
-                    </div>
+                <!-- Headline -->
+                <h1
+                    class="text-4xl md:text-5xl xl:text-7xl font-extrabold leading-[1.05] mb-6 tracking-tight text-gray-900 drop-shadow-sm">
+                    Pusat Layanan <br>
+                    <span class="text-emerald-700">Kesehatan Militer</span>
+                </h1>
+
+                <!-- Sub-text -->
+                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-10 max-w-lg font-medium">
+                    Melayani Prajurit, ASN, Keluarga, dan Masyarakat Umum dengan Motto PASTI (Profesional, Akurat,
+                    Selaras, Terarah, Ikhlas).
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://play.google.com/store/apps/details?id=app.bpjs.mobile" target="_blank"
+                        class="bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-2xl font-bold text-xs tracking-widest inline-flex items-center gap-3 shadow-xl shadow-emerald-700/20 transition-all hover:-translate-y-1 active:scale-95 group border border-emerald-600">
+                        <svg class="w-5 h-5 group-hover:-translate-y-1 transition-transform" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        Daftar Mobile JKN
+                    </a>
+                    <a href="https://wa.me/6285397616993" target="_blank"
+                        class="bg-white border-2 border-emerald-700 text-emerald-800 px-8 py-4 rounded-2xl font-bold text-xs tracking-widest inline-flex items-center gap-3 hover:bg-emerald-50 transition-all hover:-translate-y-1 active:scale-95 shadow-md group">
+                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-all" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.277.042-.615.061-1.043-.076-.235-.075-.558-.175-.989-.356-1.848-.778-3.04-2.668-3.133-2.793-.092-.125-.746-.995-.746-1.895s.467-1.341.637-1.517c.171-.176.371-.22.493-.22.122 0 .244.004.348.009.112.005.263-.042.404.298.146.353.497 1.21.542 1.301.045.092.073.2.012.321-.061.121-.092.196-.183.303-.092.107-.193.238-.274.321-.092.096-.188.2-.083.382.105.183.473.782 1.012 1.265.694.622 1.282.816 1.464.91.183.092.29.076.398-.046.107-.122.463-.538.586-.723.122-.185.244-.153.414-.092.171.061 1.085.512 1.272.606.183.092.304.137.352.213.047.078.047.447-.097.852z" />
+                        </svg>
+                        WA Pendaftaran
+                    </a>
                 </div>
             </div>
-            
-            <!-- Hero Images Block -->
-            <div class="relative reveal delay-200">
-                <div class="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl p-2 bg-white/50 backdrop-blur-md">
-                    <!-- Placeholder/Image spot -->
-                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop" alt="Hospital Front" class="w-full h-[500px] object-cover rounded-xl" />
-                </div>
-                
-                <!-- Floating Info Card -->
-                <div class="absolute -bottom-6 -left-6 z-20 bg-white p-5 rounded-2xl shadow-xl border border-emerald-50 max-w-[240px] animate-float">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="bg-emerald-100 p-3 rounded-full text-emerald-600">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+            <!-- ───── Right: Image + Overlapping Stats Card ───── -->
+            <div class="lg:col-span-6 reveal delay-200">
+
+                {{-- Outer wrapper: image + stats overlap --}}
+                <div class="relative pb-25">
+
+                    <!-- Hospital Photo — clean, no overlay -->
+                    <div
+                        class="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-emerald-900/15 border-4 border-white group bg-gray-100">
+                        <img src="{{ asset('assets/images/footage-rumkit.png') }}" alt="RS Dr. Sindhu Trisno"
+                            class="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-700">
+                    </div>
+
+                    <!-- Stats Card — overlapping, emerging from bottom of image -->
+                    <div
+                        class="absolute bottom-0 left-4 right-4 z-20 bg-emerald-950 rounded-[1.75rem] px-5 py-5 md:px-7 md:py-6 shadow-2xl shadow-emerald-950/50 border border-white/5 overflow-hidden">
+                        <!-- Dot Pattern -->
+                        <div class="absolute inset-0 opacity-[0.07] pointer-events-none"
+                            style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 14px 14px;">
                         </div>
-                        <div>
-                            <p class="text-sm font-bold text-gray-900">Pasien Terlayani</p>
-                            <p class="text-xs text-gray-500">Tahun 2023 - 2024</p>
+                        <!-- Glow accents -->
+                        <div
+                            class="absolute -top-10 left-1/4 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none">
+                        </div>
+
+                        <div class="relative z-10 grid grid-cols-4 divide-x divide-white/10 text-white">
+                            <!-- Patients -->
+                            <div class="flex flex-col items-center justify-center text-center px-2 md:px-3">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-400/15 flex items-center justify-center mb-2">
+                                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-xl md:text-2xl font-black tracking-tight leading-none mb-1">250<span
+                                        class="text-emerald-400">K+</span></span>
+                                <span class="text-[8px] font-semibold text-white/50 tracking-widest uppercase">Total
+                                    Pasien</span>
+                            </div>
+                            <!-- Doctors -->
+                            <div class="flex flex-col items-center justify-center text-center px-2 md:px-3">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-400/15 flex items-center justify-center mb-2">
+                                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-xl md:text-2xl font-black tracking-tight leading-none mb-1">{{ \App\Models\Doctor::where('is_active', true)->count() }}<span
+                                        class="text-emerald-400">+</span></span>
+                                <span class="text-[8px] font-semibold text-white/50 tracking-widest uppercase">Tim
+                                    Dokter</span>
+                            </div>
+                            <!-- Poliklinik -->
+                            <div class="flex flex-col items-center justify-center text-center px-2 md:px-3">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-400/15 flex items-center justify-center mb-2">
+                                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-xl md:text-2xl font-black tracking-tight leading-none mb-1">{{ \App\Models\Poliklinik::count() }}</span>
+                                <span
+                                    class="text-[8px] font-semibold text-white/50 tracking-widest uppercase">Poliklinik</span>
+                            </div>
+                            <!-- Beds -->
+                            <div class="flex flex-col items-center justify-center text-center px-2 md:px-3">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-400/15 flex items-center justify-center mb-2">
+                                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M2 4v16"></path>
+                                        <path d="M2 8h18a2 2 0 0 1 2 2v10"></path>
+                                        <path d="M2 17h20"></path>
+                                        <path d="M6 8v9"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-xl md:text-2xl font-black tracking-tight leading-none mb-1">116</span>
+                                <span class="text-[8px] font-semibold text-white/50 tracking-widest uppercase">Kapasitas
+                                    Bed</span>
+                            </div>
                         </div>
                     </div>
-                    <!-- Bottom Statistic Bar Background -->
-                    <div class="bg-emerald-50 py-2 px-3 rounded-lg flex items-center justify-between">
-                        <span class="font-bold text-emerald-800 text-lg">+<span class="counter-num" data-target="15000">0</span></span>
-                        <span class="text-xs font-semibold text-emerald-800">Orang</span>
-                    </div>
+
                 </div>
             </div>
 

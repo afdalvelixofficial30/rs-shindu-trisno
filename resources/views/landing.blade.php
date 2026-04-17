@@ -5,18 +5,19 @@
 @section('content')
 
     @include('partials.header')
-    
+
     <main>
         @include('partials.hero')
-        @include('partials.tentang')
-        @include('partials.statistik_visi')
-        @include('partials.nilai_inti')
+        @include('partials.trust_badges')
         @include('partials.fasilitas')
+        @include('partials.mcu_promo')
         @include('partials.dokter')
-        @include('partials.testimoni')
+        @include('partials.berita_teaser')
         @include('partials.faq')
+        @include('partials.cta_registrasi')
     </main>
 
+    @include('partials.popup_jadwal')
     @include('partials.footer')
 
 @endsection
