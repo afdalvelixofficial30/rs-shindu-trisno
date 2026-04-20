@@ -16,20 +16,43 @@
         </div>
         @endif
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10" x-data="{ imagePreview: null, showFull: false }">
             <div class="p-6 sm:p-8 bg-gray-50/50 border-b border-gray-100">
                 <h2 class="text-lg font-bold text-gray-900 mb-4">Upload Pamflet Baru</h2>
                 <form action="{{ route('admin.pamphlet.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col sm:flex-row gap-4 items-end">
                     @csrf
                     <div class="w-full sm:flex-1">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih File Gambar (Maksimal 5MB)</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih File Gambar (Format: JPG, PNG | Maksimal 5MB)</label>
                         <input type="file" name="image" accept="image/jpeg, image/png, image/jpg" required
+                            @change="const file = $event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = (e) => { imagePreview = e.target.result }; reader.readAsDataURL(file) }"
                             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 transition border border-gray-200 rounded-lg cursor-pointer bg-white">
+                        
+                        <!-- Preview Tengah & Bisa Diklik -->
+                        <template x-if="imagePreview">
+                            <div class="mt-6 flex flex-col items-center justify-center animate-fade-in">
+                                <p class="text-[10px] font-black text-emerald-600 uppercase mb-2 tracking-widest bg-emerald-50 px-3 py-1 rounded-full">Klik Gambar untuk Zoom</p>
+                                <div @click="showFull = true" class="p-2 bg-white border-2 border-emerald-100 rounded-2xl w-48 shadow-xl cursor-zoom-in hover:scale-105 transition-transform duration-300">
+                                    <img :src="imagePreview" class="w-full h-32 object-cover rounded-xl shadow-inner">
+                                </div>
+                            </div>
+                        </template>
                     </div>
                     <button type="submit" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-sm h-[46px]">
                         Upload
                     </button>
                 </form>
+
+                <!-- Modal Full View -->
+                <div x-show="showFull" 
+                     x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                     class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" x-cloak @click="showFull = false">
+                    <button class="absolute top-6 right-6 text-white/50 hover:text-white transition">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                    <img :src="imagePreview" class="max-w-full max-h-full rounded-xl shadow-2xl object-contain border-4 border-white/10" @click.stop>
+                </div>
+
                 @error('image')
                     <p class="text-red-500 text-sm mt-2 font-medium">{{ $message }}</p>
                 @enderror
