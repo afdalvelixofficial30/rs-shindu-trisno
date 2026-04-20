@@ -44,6 +44,7 @@ Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('berita.s
 Route::prefix('panel-admin')->name('admin.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('polikliniks', \App\Http\Controllers\Admin\PoliklinikController::class)->except(['show']);
+    Route::resource('doctors', \App\Http\Controllers\Admin\DoctorController::class)->except(['show']);
     
     // Manajemen Pamflet Jadwal Pop Up
     Route::get('/pamphlet-jadwal', [\App\Http\Controllers\Admin\PamphletController::class, 'index'])->name('pamphlet.index');

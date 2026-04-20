@@ -27,6 +27,6 @@ class Doctor extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-        return $this->photo ? asset('storage/' . $this->photo) : asset('images/default-doctor.png');
+        return $this->photo ? asset('assets/images/doctors/' . $this->photo) : asset('assets/images/default-doctor.png');
     }
 }

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             SettingSeeder::class,
             HospitalSeeder::class,
+            HospitalProfileSeeder::class,
         ]);
     }
 }
