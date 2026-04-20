@@ -1,3 +1,7 @@
+@php
+    $profile = \App\Models\HospitalProfile::first();
+@endphp
+
 @extends('layouts.app')
 @section('title', 'Profil & Organisasi - RS Tkt. III Dr. Sindhu Trisno Palu')
 
@@ -26,7 +30,11 @@
                     Mengenal lebih dekat Rumah Sakit Tingkat III 13.06.01 Dr. Sindhu Trisno Palu beserta struktur komando, visi, misi, dan nilai-nilai inti pelayanannya.
                 </p>
                 <div class="flex flex-wrap gap-6">
-                    @foreach([['num'=>'TIPE C','label'=>'Klasifikasi RS'],['num'=>'UTAMA','label'=>'Akreditasi LAFKI'],['num'=>'BSrE','label'=>'TTE Tersertifikasi']] as $s)
+                    @foreach([
+                        ['num'=>$profile->hospital_type ?? 'TIPE C','label'=>'Klasifikasi RS'],
+                        ['num'=>$profile->accreditation ?? 'UTAMA','label'=>'Akreditasi LAFKI'],
+                        ['num'=>$profile->certification ?? 'BSrE','label'=>'TTE Tersertifikasi']
+                    ] as $s)
                     <div class="flex items-center gap-2">
                         <p class="text-xl font-black text-emerald-400">{{ $s['num'] }}</p>
                         <p class="text-[10px] font-bold text-emerald-300/60 tracking-widest uppercase">{{ $s['label'] }}</p>
@@ -43,11 +51,11 @@
                 <div class="relative flex justify-center lg:justify-start group">
                     <div class="absolute -inset-4 bg-emerald-200/40 rounded-[3rem] blur-2xl group-hover:bg-emerald-300/40 transition-colors duration-700"></div>
                     <div class="relative bg-gradient-to-t from-emerald-950 via-emerald-800 to-emerald-600 rounded-[2.5rem] overflow-hidden shadow-2xl border border-emerald-700/50 w-full max-w-[360px] mx-auto h-[480px] sm:h-[520px]">
-                        <img src="{{ asset('assets/images/karumkit.png') }}" alt="KARUMKIT RS Dr. Sindhu Trisno"
+                        <img src="{{ asset($profile->karumkit_photo ?? 'assets/images/karumkit.png') }}" alt="KARUMKIT RS Dr. Sindhu Trisno"
                              class="w-full h-[100%] sm:h-[150%] absolute bottom-0 left-5 right-0 object-contain object-bottom scale-110 hover:scale-115 origin-bottom transition-transform duration-700 z-0">
                         {{-- Floating Label --}}
                         <div class="absolute z-10 bottom-8 left-1/2 -translate-x-1/2 w-[85%] bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-white/50">
-                            <h4 class="text-gray-900 font-extrabold text-sm text-center leading-snug">Letnan Kolonel Ckm<br>dr. Marles Edy Wanto Haloho, M.Kes.</h4>
+                            <h4 class="text-gray-900 font-extrabold text-sm text-center leading-snug">{{ $profile->karumkit_rank ?? 'Letnan Kolonel Ckm' }}<br>{{ $profile->karumkit_name ?? 'Dr.dr. Marles Edy Wanto Haloho, M.Kes' }}</h4>
                             <p class="text-emerald-700 font-bold text-[9px] text-center tracking-[0.2em] mt-2 uppercase">Kepala Rumah Sakit (KARUMKIT)</p>
                         </div>
                     </div>
@@ -60,12 +68,12 @@
                         Menjunjung Tinggi <br><span class="text-emerald-700">Profesionalisme & Ikhlas</span>
                     </h2>
                     <p class="text-gray-600 text-base leading-relaxed mb-8">
-                        Rumah Sakit Tentara (RS Tkt. III 13.06.01) Dr. Sindhu Trisno Palu merupakan institusi kesehatan militer di bawah naungan Kodam XXIII Palaka Wira. Kami berdedikasi kuat untuk memberikan pelayanan medis yang prima, akurat, dan terarah bagi Prajurit TNI AD, PNS, Keluarga, serta Masyarakat Umum di wilayah Provinsi Sulawesi Tengah.
+                        {{ $profile->welcome_message ?? 'Rumah Sakit Tentara (RS Tkt. III 13.06.01) Dr. Sindhu Trisno Palu merupakan institusi kesehatan militer di bawah naungan Kodam XXIII Palaka Wira...' }}
                     </p>
                     
                     {{-- Motto Mini Grid --}}
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-6 mb-10 pt-8 border-t border-gray-100">
-                        @foreach(['Profesional', 'Akurat', 'Selaras', 'Terarah', 'Ikhlas'] as $motto)
+                        @foreach($profile->motto ?? ['Profesional', 'Akurat', 'Selaras', 'Terarah', 'Ikhlas'] as $motto)
                         <div class="flex items-center gap-3">
                             <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></div>
                             <span class="text-xs font-bold text-gray-800 tracking-widest uppercase">{{ $motto }}</span>
@@ -93,7 +101,7 @@
                             <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-emerald-700 transition-colors">Visi Kami</h3>
                         </div>
                         <blockquote class="border-l-4 border-emerald-500 pl-5 text-gray-700 text-lg leading-relaxed font-medium mt-auto mb-auto">
-                            "Menjadi Rumah Sakit Unggulan bagi Prajurit TNI AD, PNS, dan Keluarga serta masyarakat umum di wilayah Provinsi Sulawesi Tengah."
+                            "{{ $profile->visi ?? 'Menjadi Rumah Sakit Unggulan...' }}"
                         </blockquote>
                     </div>
 
@@ -107,12 +115,7 @@
                             <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-emerald-700 transition-colors">Misi Kami</h3>
                         </div>
                         <ul class="space-y-4">
-                            @foreach([
-                                'Memberikan pelayanan kesehatan yang prima.',
-                                'Memberikan pelayanan keparipurnaan yang dilandasi Profesionalisme, Disiplin, Bermoral, dan Soliditas.',
-                                'Meningkatkan SDM yang handal, dan memiliki budaya organisasi sebagai pelayan prima.',
-                                'Mengelola seluruh sumber daya secara efektif, efisien, dan akuntabel.'
-                            ] as $misi)
+                            @foreach($profile->misi ?? ['Memberikan pelayanan kesehatan yang prima.'] as $misi)
                             <li class="flex items-start gap-3 text-sm text-gray-700 leading-relaxed font-medium">
                                 <span class="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -136,10 +139,10 @@
                         <h3 class="text-5xl md:text-7xl font-black text-white mb-10 tracking-tight">PASTI</h3>
                         
                         <div class="flex flex-wrap justify-center gap-3 md:gap-5">
-                            @foreach([['P','Profesional'],['A','Akurat'],['S','Selaras'],['T','Terarah'],['I','Ikhlas']] as $item)
+                            @foreach(($profile->motto ?? []) as $m)
                             <div class="flex items-center gap-3 bg-emerald-900/50 border border-emerald-800/50 px-5 md:px-6 py-2.5 rounded-2xl hover:bg-emerald-800 hover:border-emerald-700 transition-colors">
-                                <span class="w-8 h-8 rounded-full bg-emerald-500 text-white font-black text-sm flex items-center justify-center shadow-inner">{{ $item[0] }}</span>
-                                <span class="text-sm font-bold text-emerald-100 tracking-widest uppercase">{{ $item[1] }}</span>
+                                <span class="w-8 h-8 rounded-full bg-emerald-500 text-white font-black text-sm flex items-center justify-center shadow-inner">{{ substr($m, 0, 1) }}</span>
+                                <span class="text-sm font-bold text-emerald-100 tracking-widest uppercase">{{ $m }}</span>
                             </div>
                             @endforeach
                         </div>
@@ -158,8 +161,8 @@
                     @php
                         $nilais = [
                             ['title'=>'Empati',     'desc'=>'Mengutamakan kepedulian dalam pelayanan.', 'color'=>'rose',   'icon'=>'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'],
-                            ['title'=>'Profesional','desc'=>'Pelayanan terbaik & etika profesi tinggi.', 'color'=>'emerald','icon'=>'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
-                            ['title'=>'Inovatif',   'desc'=>'Berinovasi dengan teknologi medis terkini.','color'=>'sky',    'icon'=>'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'],
+                            ['title'=>'Profesional', 'desc'=>'Pelayanan terbaik & etika profesi tinggi.', 'color'=>'emerald','icon'=>'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+                            ['title'=>'Inovatif',   'desc'=>'Berinovasi dengan teknologi medis terkini.', 'color'=>'sky',    'icon'=>'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'],
                             ['title'=>'Kolaboratif','desc'=>'Sinergi solid antar departemen medis.',      'color'=>'violet', 'icon'=>'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
                         ];
                     @endphp
@@ -184,7 +187,7 @@
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Struktur Organisasi</h2>
                 </div>
                 <div class="bg-white p-5 md:p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden hover:shadow-md transition-shadow">
-                    <img src="{{ asset('assets/images/bagan.png') }}" alt="Struktur Organisasi RS Dr. Sindhu Trisno"
+                    <img src="{{ asset($profile->organization_chart ?? 'assets/images/bagan.png') }}" alt="Struktur Organisasi RS Dr. Sindhu Trisno"
                          class="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500">
                 </div>
             </div>

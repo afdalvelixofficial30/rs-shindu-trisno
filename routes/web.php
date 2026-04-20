@@ -44,4 +44,14 @@ Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('berita.s
 Route::prefix('panel-admin')->name('admin.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('polikliniks', \App\Http\Controllers\Admin\PoliklinikController::class)->except(['show']);
+    
+    // Manajemen Pamflet Jadwal Pop Up
+    Route::get('/pamphlet-jadwal', [\App\Http\Controllers\Admin\PamphletController::class, 'index'])->name('pamphlet.index');
+    Route::post('/pamphlet-jadwal', [\App\Http\Controllers\Admin\PamphletController::class, 'store'])->name('pamphlet.store');
+    Route::post('/pamphlet-jadwal/{id}/activate', [\App\Http\Controllers\Admin\PamphletController::class, 'activate'])->name('pamphlet.activate');
+    Route::delete('/pamphlet-jadwal/{id}', [\App\Http\Controllers\Admin\PamphletController::class, 'destroy'])->name('pamphlet.destroy');
+
+    // Pengaturan Profil RS
+    Route::get('/profile-rs', [\App\Http\Controllers\Admin\HospitalProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile-rs', [\App\Http\Controllers\Admin\HospitalProfileController::class, 'update'])->name('profile.update');
 });
