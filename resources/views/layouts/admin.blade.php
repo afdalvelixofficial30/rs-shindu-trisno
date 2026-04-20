@@ -65,7 +65,7 @@
                 <p class="px-4 text-xs font-bold text-emerald-400/50  tracking-widest mb-3">Publikasi & Info</p>
                 <ul class="space-y-1">
                     <li>
-                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-100 hover:bg-emerald-800/50 hover:text-white transition-colors">
+                        <a href="{{ route('admin.posts.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.posts.*') ? 'bg-emerald-800 text-white font-bold shadow-inner' : 'text-emerald-100 hover:bg-emerald-800/50 hover:text-white transition-colors' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-.25-1l-3-6a2 2 0 00-1.75-1H10M4 16h16M4 12h16"/></svg>
                             Berita & Artikel
                         </a>
