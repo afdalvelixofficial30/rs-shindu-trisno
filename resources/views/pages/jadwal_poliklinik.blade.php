@@ -2,27 +2,48 @@
 @section('title', 'Jadwal Poliklinik - RS Tkt. III Dr. Sindhu Trisno Palu')
 
 @php
-$polikliniksList = [
-    ['shift'=>'Pagi', 'time'=>'08.00 – 11.10 WITA','name'=>'Klinik Anak',                        'doctors'=>['dr. Kartini Akune, Sp.A'],                                                                         'schedule'=>'Senin – Jumat',          'icon'=>'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
-    ['shift'=>'Pagi', 'time'=>'08.00 – 11.10 WITA','name'=>'Klinik Kandungan / Obgyn',             'doctors'=>['dr. Abdul Faris, Sp.OG(K)'],                                                                      'schedule'=>'Senin – Jumat',          'icon'=>'M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M15 13a3 3 0 11-6 0 3 3 0 016 0z'],
-    ['shift'=>'Pagi', 'time'=>'08.00 – 11.10 WITA','name'=>'Klinik Rehabilitasi Medik & Fisioterapi','doctors'=>['Pelayanan Tim Fisioterapi'],                                                                    'schedule'=>'Senin – Jumat',          'icon'=>'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'],
-    ['shift'=>'Pagi', 'time'=>'08.00 – 11.10 WITA','name'=>'Klinik THT-KL',                        'doctors'=>['dr. Bastiana J., M.Kes, Sp.THT-KL','dr. Muhammat Nur Musa, Sp.THT-KL'],                         'schedule'=>'Senin, Rabu, Jumat',     'icon'=>'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z'],
-    ['shift'=>'Pagi', 'time'=>'08.00 – 11.10 WITA','name'=>'Klinik Orthopedi',                     'doctors'=>['dr. Sri Siksapirani Ciptaningsih, Sp.OT'],                                                        'schedule'=>'Senin, Rabu, Jumat',     'icon'=>'M4 6h16M4 10h16M4 14h16M4 18h16'],
-    ['shift'=>'Pagi', 'time'=>'08.00 – 11.10 WITA','name'=>'Klinik Gigi Periodonti',               'doctors'=>['dr. Hengki Yudhana, Sp.KG (Konservasi Gigi)'],                                                   'schedule'=>'Senin – Jumat',          'icon'=>'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Penyakit Dalam',                'doctors'=>['dr. Arfan Sanusi, Sp.PD Finasim','dr. Winarti Arifuddin, Sp.PD'],                               'schedule'=>'Senin – Jumat',          'icon'=>'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Psikologi',                     'doctors'=>['Layanan Konsultasi Psikologi'],                                                                    'schedule'=>'Senin – Jumat',          'icon'=>'M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Jantung & Kardiovaskular',      'doctors'=>['dr. Venice Chairiadi, Sp.JP, FIHA'],                                                              'schedule'=>'Senin – Kamis',          'icon'=>'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Bedah',                         'doctors'=>['dr. I Made Wirka, Sp.B','dr. Mohamad Zulfikar, Sp.B','dr. Agung Kurniawan, Sp.B-KBD'],          'schedule'=>'Senin – Jumat',          'icon'=>'M13 10V3L4 14h7v7l9-11h-7z'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Saraf & Neurologi',             'doctors'=>['dr. Ruslan Ramlan Ramli, Sp.S','dr. Magdalena Sumendap, Sp.N','dr. Marina, Sp.N'],              'schedule'=>'Senin – Jumat',          'icon'=>'M13 10V3L4 14h7v7l9-11h-7z'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Kulit dan Kelamin',             'doctors'=>['dr. Halida Nuraini, Sp.KK','dr. Zakiani Sakka, Sp.KK','dr. Sukma Anjani, Sp.KK'],              'schedule'=>'Senin – Jumat',          'icon'=>'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
-    ['shift'=>'Siang','time'=>'12.00 – 13.00 WITA','name'=>'Klinik Jiwa & Keswa',                  'doctors'=>['Layanan Konsultasi Psikiatri'],                                                                    'schedule'=>'Selasa – Kamis',         'icon'=>'M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3'],
-    ['shift'=>'Sore', 'time'=>'14.00 – 16.20 WITA','name'=>'Klinik Mata',                          'doctors'=>['dr. Santy Kusumawaty, Sp.M, M.Kes'],                                                              'schedule'=>'Senin, Rabu, Kamis, Jumat','icon'=>'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'],
-    ['shift'=>'Sore', 'time'=>'14.00 – 16.20 WITA','name'=>'Klinik Jantung Sore',                  'doctors'=>['dr. Venice Chairiadi, Sp.JP, FIHA'],                                                              'schedule'=>'Senin – Jumat',          'icon'=>'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'],
-    ['shift'=>'Sore', 'time'=>'14.00 – 16.20 WITA','name'=>'Klinik Paru',                          'doctors'=>['Layanan Spesialis Paru'],                                                                          'schedule'=>'Senin – Jumat',          'icon'=>'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'],
-];
+$polikliniksList = [];
+
+foreach($polikliniks as $poli) {
+    if ($poli->doctors->isEmpty()) continue;
+    
+    $pagiDocs = [];
+    $siangDocs = [];
+    $soreDocs = [];
+
+    foreach($poli->doctors as $doc) {
+        $timeStr = strtolower($doc->schedule_text);
+        if (preg_match('/(0[7-9]|10)[:\.]/', $timeStr)) {
+            $pagiDocs[] = $doc;
+        } elseif (preg_match('/(1[1-4])[:\.]/', $timeStr)) {
+            $siangDocs[] = $doc;
+        } elseif (preg_match('/(1[5-8])[:\.]/', $timeStr)) {
+            $soreDocs[] = $doc;
+        } else {
+            // Default ke pagi kalau sulit di-parsing atau kosong
+            $pagiDocs[] = $doc; 
+        }
+    }
+
+    $icon = 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4';
+
+    if (count($pagiDocs) > 0) {
+        $polikliniksList[] = ['shift'=>'Pagi', 'name'=>'Klinik ' . $poli->name, 'schedule'=>'Sesuai Jadwal Dokter', 'icon'=>$icon, 'doctors'=>collect($pagiDocs)];
+    }
+    if (count($siangDocs) > 0) {
+        $polikliniksList[] = ['shift'=>'Siang', 'name'=>'Klinik ' . $poli->name, 'schedule'=>'Sesuai Jadwal Dokter', 'icon'=>$icon, 'doctors'=>collect($siangDocs)];
+    }
+    if (count($soreDocs) > 0) {
+        $polikliniksList[] = ['shift'=>'Sore', 'name'=>'Klinik ' . $poli->name, 'schedule'=>'Sesuai Jadwal Dokter', 'icon'=>$icon, 'doctors'=>collect($soreDocs)];
+    }
+}
 
 // Prepare flat array for Alpine: only name & shift needed for filter detection
-$clinicsForAlpine = array_map(fn($p) => ['name' => $p['name'], 'shift' => $p['shift']], $polikliniksList);
+$clinicsForAlpine = array_map(fn($p) => [
+    'name' => $p['name'], 
+    'shift' => $p['shift'],
+    'docs' => $p['doctors']->pluck('name')->implode(' ')
+], $polikliniksList);
 
 $shiftMeta = [
     'Pagi'  => ['time'=>'08.00 – 11.10', 'badge'=>'bg-amber-50 text-amber-700 border-amber-100', 'dot'=>'bg-amber-400',  'bar'=>'bg-amber-400'],
@@ -70,19 +91,19 @@ $shiftMeta = [
                  search: '',
                  activeShift: 'Semua',
                  clinics: {{ \Illuminate\Support\Js::from($clinicsForAlpine) }},
-                 matchesFilter(name, shift) {
+                 matchesFilter(name, shift, docs) {
                      const s = this.search.toLowerCase().trim();
                      const matchShift = this.activeShift === 'Semua' || this.activeShift === shift;
-                     const matchName  = s === '' || name.toLowerCase().includes(s);
+                     const matchName  = s === '' || name.toLowerCase().includes(s) || (docs && docs.toLowerCase().includes(s));
                      return matchShift && matchName;
                  },
                  get hasResults() {
-                     return this.clinics.some(c => this.matchesFilter(c.name, c.shift));
+                     return this.clinics.some(c => this.matchesFilter(c.name, c.shift, c.docs));
                  }
              }">
 
-            {{-- ── STICKY FILTER BAR ── --}}
-            <div class="flex flex-col sm:flex-row gap-3 mb-10 p-3 bg-white rounded-2xl border border-gray-100 shadow-sm sticky top-20 z-30">
+            {{-- ── FILTER BAR ── --}}
+            <div class="flex flex-col sm:flex-row gap-3 mb-10 p-3 bg-white rounded-2xl border border-gray-100 shadow-sm relative z-30">
                 {{-- Search --}}
                 <div class="flex-grow relative">
                     <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
@@ -96,7 +117,13 @@ $shiftMeta = [
                 </div>
                 {{-- Shift Tabs --}}
                 <div class="flex items-center gap-1 bg-gray-50 p-1 rounded-xl shrink-0 flex-wrap">
-                    @foreach(['Semua'=>'Semua','Pagi'=>'Pagi (6)','Siang'=>'Siang (7)','Sore'=>'Sore (3)'] as $val=>$label)
+                    @php
+                        $cSemua = count($polikliniksList);
+                        $cPagi  = count(array_filter($polikliniksList, fn($p) => $p['shift'] === 'Pagi'));
+                        $cSiang = count(array_filter($polikliniksList, fn($p) => $p['shift'] === 'Siang'));
+                        $cSore  = count(array_filter($polikliniksList, fn($p) => $p['shift'] === 'Sore'));
+                    @endphp
+                    @foreach(['Semua'=>"Semua ($cSemua)",'Pagi'=>"Pagi ($cPagi)",'Siang'=>"Siang ($cSiang)",'Sore'=>"Sore ($cSore)"] as $val=>$label)
                     <button @click="activeShift = '{{ $val }}'"
                             :class="activeShift === '{{ $val }}' ? 'bg-white shadow-sm text-emerald-700 font-bold' : 'text-gray-500 hover:text-gray-700'"
                             class="px-3.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 whitespace-nowrap">
@@ -126,8 +153,11 @@ $shiftMeta = [
                 {{-- Cards --}}
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach($polisInShift as $poli)
-                    @php $safeName = addslashes($poli['name']); @endphp
-                    <div x-show="matchesFilter('{{ $safeName }}', '{{ $poli['shift'] }}')"
+                    @php 
+                        $safeName = addslashes($poli['name']); 
+                        $docsStr = addslashes($poli['doctors']->pluck('name')->implode(' '));
+                    @endphp
+                    <div x-show="matchesFilter('{{ $safeName }}', '{{ $poli['shift'] }}', '{{ $docsStr }}')"
                          x-transition:enter="transition ease-out duration-150"
                          x-transition:enter-start="opacity-0 scale-95"
                          x-transition:enter-end="opacity-100 scale-100"
@@ -158,19 +188,27 @@ $shiftMeta = [
                             <span class="text-[10px] text-gray-400 font-semibold">{{ $poli['schedule'] }}</span>
                         </div>
 
-                        {{-- Doctors --}}
-                        <div class="pt-3 border-t border-gray-50 space-y-2 flex-grow relative z-10">
+                        <div class="pt-3 border-t border-gray-50 space-y-3 flex-grow relative z-10">
                             @foreach($poli['doctors'] as $doctor)
-                            <div class="flex items-center gap-2">
-                                <div class="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
-                                    @php
-                                        $clean    = preg_replace('/^(dr\.|drg\.|Dr\.)\s*/i', '', $doctor);
-                                        $parts    = preg_split('/\s+/', trim($clean));
-                                        $initials = strtoupper(substr($parts[0] ?? 'D', 0, 1) . (substr($parts[1] ?? '', 0, 1)));
-                                    @endphp
-                                    <span class="text-[8px] font-black text-emerald-700">{{ $initials }}</span>
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-8 h-8 rounded-full overflow-hidden bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
+                                    @if($doctor->photo && file_exists(public_path('assets/images/doctors/'.$doctor->photo)))
+                                        <img src="{{ asset('assets/images/doctors/'.$doctor->photo) }}" alt="{{ $doctor->name }}" class="w-full h-full object-cover">
+                                    @else
+                                        @php
+                                            $clean    = preg_replace('/^(dr\.|drg\.|Dr\.)\s*/i', '', $doctor->name);
+                                            $parts    = preg_split('/\s+/', trim($clean));
+                                            $initials = strtoupper(substr($parts[0] ?? 'D', 0, 1) . (substr($parts[1] ?? '', 0, 1)));
+                                        @endphp
+                                        <span class="text-[9px] font-black text-emerald-700">{{ $initials }}</span>
+                                    @endif
                                 </div>
-                                <p class="text-[11px] text-gray-600 leading-tight font-medium">{{ $doctor }}</p>
+                                <div class="flex flex-col">
+                                    <p class="text-xs text-gray-800 leading-tight font-bold mb-0.5">{{ $doctor->name }}</p>
+                                    @if($doctor->schedule_text)
+                                    <p class="text-[9px] font-semibold text-emerald-600 bg-emerald-50 w-fit px-1.5 py-0.5 rounded">{{ $doctor->schedule_text }}</p>
+                                    @endif
+                                </div>
                             </div>
                             @endforeach
                         </div>
@@ -199,40 +237,7 @@ $shiftMeta = [
                 </button>
             </div>
 
-            {{-- ── DOKTER PENUNJANG ── --}}
-            <div class="mt-8 mb-10" x-show="activeShift === 'Semua' && search.trim() === ''">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="w-2.5 h-2.5 rounded-full bg-gray-400 shrink-0"></span>
-                    <h2 class="text-base font-extrabold text-gray-900">Dokter Penunjang</h2>
-                    <span class="text-[10px] font-bold tracking-widest border border-gray-200 bg-gray-50 text-gray-500 px-3 py-1 rounded-full">Non-Reguler / Standby</span>
-                </div>
-                <div class="grid sm:grid-cols-3 gap-4">
-                    @foreach([
-                        ['unit'=>'Radiologi',          'icon'=>'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z','doctors'=>['dr. Selvi Oktaviana Purba, Sp.Rad','dr. Robert Mangiri, Sp.Rad, M.Sc']],
-                        ['unit'=>'Patologi Klinik / Lab','icon'=>'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z','doctors'=>['dr. Haerani Harun, M.Kes, Sp.PK']],
-                        ['unit'=>'Anestesi / ICU',      'icon'=>'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z','doctors'=>['dr. Teguh Ismanto, Sp.An','dr. Salsiah, Sp.An-KIC']],
-                    ] as $dp)
-                    <div class="group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-sm p-5 transition-all duration-200 hover:-translate-y-0.5">
-                        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-50">
-                            <div class="w-9 h-9 rounded-xl bg-gray-50 group-hover:bg-gray-700 flex items-center justify-center text-gray-500 group-hover:text-white transition-all shrink-0">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $dp['icon'] }}"/>
-                                </svg>
-                            </div>
-                            <h4 class="text-sm font-extrabold text-gray-900">{{ $dp['unit'] }}</h4>
-                        </div>
-                        <div class="space-y-2">
-                            @foreach($dp['doctors'] as $doc)
-                            <div class="flex items-center gap-2">
-                                <div class="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0"></div>
-                                <p class="text-xs text-gray-500 font-medium">{{ $doc }}</p>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
+
 
             {{-- ── CTA ── --}}
             <div class="bg-emerald-950 rounded-2xl p-7 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border border-white/5 mt-6">

@@ -2,26 +2,21 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use App\Models\Doctor;
 use App\Models\Poliklinik;
-use App\Models\Post;
-use App\Models\McuPackage;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Schema;
 
-class HospitalSeeder extends Seeder
+class UpdateDataDokterSeeder extends Seeder
 {
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
         Poliklinik::truncate();
         Doctor::truncate();
-        Post::truncate();
-        McuPackage::truncate();
         Schema::enableForeignKeyConstraints();
 
-        // 1. Poliklinik & Doctors Data (Real Data Integration)
         $polikliniksData = [
             'Penyakit Dalam' => [
                 ['name' => 'dr. Arfan Sanusi, Sp.PD, FINASIM', 'sp' => 'Spesialis Penyakit Dalam', 'photo' => 'dr. Arfan Sanusi, Sp.PD (Dokter Spesialis Penyakit Dalam).jpeg', 'schedule' => 'Senin & Selasa | 13.00 - Selesai'],
@@ -99,63 +94,6 @@ class HospitalSeeder extends Seeder
                     'is_active' => true,
                 ]);
             }
-        }
-
-        // 2. Posts (Berita & Artikel)
-        $posts = [
-            [
-                'category' => 'Edukasi',
-                'title' => 'Pentingnya Deteksi Dini Kanker Payudara',
-                'slug' => 'deteksi-dini-kanker-payudara',
-                'content' => '<p>Pelajari langkah-langkah SADARI dan pentingnya pemeriksaan rutin untuk kesehatan organ vital. Deteksi dini sangat penting dalam penanganan kanker payudara...</p>',
-                'is_published' => true,
-                'created_at' => now()->subDays(2),
-            ],
-            [
-                'category' => 'Berita',
-                'title' => 'RS Dr. Sindhu Trisno Raih Akreditasi Paripurna',
-                'slug' => 'akreditasi-paripurna-sindhu-trisno',
-                'content' => '<p>Pencapaian luar biasa dalam upaya peningkatan mutu pelayanan kesehatan bagi prajurit dan masyarakat. RS Dr. Sindhu Trisno berkomitmen memberikan standar pelayanan tertinggi...</p>',
-                'is_published' => true,
-                'created_at' => now()->subDays(5),
-            ],
-            [
-                'category' => 'Edukasi',
-                'title' => 'Tips Menjaga Imunitas di Musim Pancaroba',
-                'slug' => 'tips-menjaga-imunitas-pancaroba',
-                'content' => '<p>Simak pola makan dan jadwal istirahat yang tepat untuk menjaga tubuh tetap fit di cuaca ekstrem. Memasuki musim pancaroba, imunitas tubuh menjadi tantangan utama...</p>',
-                'is_published' => true,
-                'created_at' => now(),
-            ],
-            [
-                'category' => 'Pengumuman',
-                'title' => 'Jadwal Layanan Saat Libur Idul Fitri 1445 H',
-                'slug' => 'jadwal-libur-idul-fitri-1445h',
-                'content' => '<p>Terlampir jadwal layanan operasional dan dokter spesialis rawat jalan selama hari cuti bersama nasional.</p>',
-                'is_published' => true,
-                'created_at' => now()->subDays(1),
-            ],
-        ];
-
-        foreach ($posts as $postData) {
-            Post::create($postData);
-        }
-
-        // 3. MCU Packages
-        $mcuPackages = [
-            ['name' => 'Paket MCU Dasar', 'price' => 500000, 'description' => 'Pemeriksaan fisik umum, tes laboratorium dasar (darah keping, kolesterol total, gula darah sewaktu), dan rontgen dada.'],
-            ['name' => 'Paket MCU Pegawai (Standard)', 'price' => 850000, 'description' => 'Pemeriksaan fisik, lab lengkap (darah rutin, fungsi hati, ginjal), rekam jantung (ECG).'],
-            ['name' => 'Paket MCU Eksekutif Pria', 'price' => 2500000, 'description' => 'Pemeriksaan fisik komprehensif, lab intensif, tumor marker, spirometri, audiometri, dan treadmill test.'],
-            ['name' => 'Paket MCU Pranikah', 'price' => 1200000, 'description' => 'Pemeriksaan VDRL, TPHA, screening Thalasemia, golongan darah, Rhesus, serta TORCH untuk wanita.'],
-        ];
-
-        foreach ($mcuPackages as $mcu) {
-            McuPackage::create([
-                'name' => $mcu['name'],
-                'price' => $mcu['price'],
-                'description' => $mcu['description'],
-                'is_active' => true,
-            ]);
         }
     }
 }

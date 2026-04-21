@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AiChatController;
+
+// ─── AI CHAT (Ners Sindhu) ───────────────────────────────────────
+Route::post('/api/ai-chat', [AiChatController::class, 'chat'])->name('ai.chat');
 
 // Halaman Utama (Landing)
 Route::get('/', [LandingController::class, 'index'])->name('home');

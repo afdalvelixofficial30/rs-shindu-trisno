@@ -11,6 +11,7 @@
     <title>@yield('title', 'RS Tkt. III Dr. Sindhu Trisno - Palu')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="font-sans antialiased bg-[#ecfdf5]/30 relative" x-data>
     
@@ -44,5 +45,9 @@
     <div class="relative z-0">
         @yield('content')
     </div>
+
+    {{-- AI Chat Widget - Ners Sindhu --}}
+    @include('partials.ai_chat_widget')
+
 </body>
 </html>

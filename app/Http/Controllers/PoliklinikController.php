@@ -9,7 +9,9 @@ class PoliklinikController extends Controller
 {
     public function index()
     {
-        $polikliniks = Poliklinik::with('doctors')->get()->groupBy('shift');
+        $polikliniks = Poliklinik::with(['doctors' => function ($query) {
+            $query->where('is_active', true);
+        }])->where('is_active', true)->get();
         
         return view('pages.jadwal_poliklinik', compact('polikliniks'));
     }

@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    // Google Gemini AI
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY', 'your-gemini-api-key-here'),
+    ],
+
 ];
