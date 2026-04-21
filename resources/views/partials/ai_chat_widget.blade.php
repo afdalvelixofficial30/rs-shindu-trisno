@@ -140,9 +140,7 @@
             <!-- Right pointing triangle for tooltip -->
             <div class="absolute top-1/2 -right-1 -translate-y-1/2 border-4 border-transparent" style="border-left-color: #1f2937;"></div>
         </div>
-        {{-- Pulse ring (only when chat is closed) --}}
-        <span x-show="!open"
-              class="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-30 pointer-events-none"></span>
+
 
         {{-- Unread badge (new) --}}
         <span x-show="!open && unread > 0"
