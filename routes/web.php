@@ -5,9 +5,20 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AiChatController;
+use App\Http\Controllers\Auth\LoginController;
 
 // ─── AI CHAT (Ners Sindhu) ───────────────────────────────────────
 Route::post('/api/ai-chat', [AiChatController::class, 'chat'])->name('ai.chat');
+
+Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/admin/login', [LoginController::class, 'login']);
+Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout');
+
+// RUTE SEMENTARA UNTUK MENGUPDATE DATA DOKTER DI HOSTING (TANPA TERMINAL)
+Route::get('/sync-dokter-hosting-rahasia', function() {
+    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'UpdateDataDokterSeeder']);
+    return "✅ Data Dokter dan Poliklinik di Hosting Berhasil Disinkronkan dengan Data Terbaru!";
+});
 
 // Halaman Utama (Landing)
 Route::get('/', [LandingController::class, 'index'])->name('home');
