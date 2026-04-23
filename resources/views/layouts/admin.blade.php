@@ -51,9 +51,15 @@
                 <p class="px-4 text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">Utama</p>
                 <ul class="space-y-1 text-sm font-semibold">
                     <li>
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
-                            <svg class="w-5 h-5 {{ request()->routeIs('admin.dashboard') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                            Dashboard
+                        @php $isDashboardEnabled = (\App\Models\Setting::where('key', 'dashboard')->where('group', 'Operasional')->first()->value ?? '1') === '1'; @endphp
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 {{ request()->routeIs('admin.dashboard') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                Dashboard
+                            </div>
+                            @if(!$isDashboardEnabled)
+                                <span class="text-[8px] bg-white/10 px-2 py-0.5 rounded-full text-white/40 uppercase">Dev</span>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -64,15 +70,27 @@
                 <p class="px-4 text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">Layanan Medis</p>
                 <ul class="space-y-1 text-sm font-semibold">
                     <li>
-                        <a href="{{ route('admin.polikliniks.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.polikliniks.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
-                             <svg class="w-5 h-5 {{ request()->routeIs('admin.polikliniks.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                            Daftar Poliklinik
+                        @php $isPoliEnabled = (\App\Models\Setting::where('key', 'polikliniks')->where('group', 'Operasional')->first()->value ?? '1') === '1'; @endphp
+                        <a href="{{ route('admin.polikliniks.index') }}" class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.polikliniks.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
+                             <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 {{ request()->routeIs('admin.polikliniks.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                Daftar Poliklinik
+                             </div>
+                            @if(!$isPoliEnabled)
+                                <span class="text-[8px] bg-white/10 px-2 py-0.5 rounded-full text-white/40 uppercase">Dev</span>
+                            @endif
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.doctors.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.doctors.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
-                            <svg class="w-5 h-5 {{ request()->routeIs('admin.doctors.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                            Dokter Spesialis
+                        @php $isDocEnabled = (\App\Models\Setting::where('key', 'doctors')->where('group', 'Operasional')->first()->value ?? '1') === '1'; @endphp
+                        <a href="{{ route('admin.doctors.index') }}" class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.doctors.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 {{ request()->routeIs('admin.doctors.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                                Dokter Spesialis
+                            </div>
+                            @if(!$isDocEnabled)
+                                <span class="text-[8px] bg-white/10 px-2 py-0.5 rounded-full text-white/40 uppercase">Dev</span>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -83,15 +101,27 @@
                 <p class="px-4 text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">Informasi Publik</p>
                 <ul class="space-y-1 text-sm font-semibold">
                     <li>
-                        <a href="{{ route('admin.posts.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.posts.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
-                            <svg class="w-5 h-5 {{ request()->routeIs('admin.posts.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 100-2V9.5a2 2 0 010-.25-1H10M4 16h16M4 12h16"/></svg>
-                            Berita & Artikel
+                        @php $isPostsEnabled = (\App\Models\Setting::where('key', 'posts')->where('group', 'Operasional')->first()->value ?? '1') === '1'; @endphp
+                        <a href="{{ route('admin.posts.index') }}" class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.posts.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 {{ request()->routeIs('admin.posts.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 100-2V9.5a2 2 0 010-.25-1H10M4 16h16M4 12h16"/></svg>
+                                Berita & Artikel
+                            </div>
+                            @if(!$isPostsEnabled)
+                                <span class="text-[8px] bg-white/10 px-2 py-0.5 rounded-full text-white/40 uppercase">Dev</span>
+                            @endif
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.pamphlet.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.pamphlet.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
-                             <svg class="w-5 h-5 {{ request()->routeIs('admin.pamphlet.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            Pop-Up Jadwal (Pamflet)
+                        @php $isPamphletEnabled = (\App\Models\Setting::where('key', 'pamphlet')->where('group', 'Operasional')->first()->value ?? '1') === '1'; @endphp
+                        <a href="{{ route('admin.pamphlet.index') }}" class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.pamphlet.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
+                             <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 {{ request()->routeIs('admin.pamphlet.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                Pop-Up Jadwal (Pamflet)
+                             </div>
+                            @if(!$isPamphletEnabled)
+                                <span class="text-[8px] bg-white/10 px-2 py-0.5 rounded-full text-white/40 uppercase">Dev</span>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -102,9 +132,15 @@
                 <p class="px-4 text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">Sistem</p>
                 <ul class="space-y-1 text-sm font-semibold">
                     <li>
-                        <a href="{{ route('admin.profile.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.profile.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
-                            <svg class="w-5 h-5 {{ request()->routeIs('admin.profile.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            Profil Rumah Sakit
+                        @php $isProfileEnabled = (\App\Models\Setting::where('key', 'profile')->where('group', 'Operasional')->first()->value ?? '1') === '1'; @endphp
+                        <a href="{{ route('admin.profile.index') }}" class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request()->routeIs('admin.profile.*') ? 'bg-emerald-600/20 text-emerald-400' : 'text-white/60 hover:bg-white/5 hover:text-white' }}">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 {{ request()->routeIs('admin.profile.*') ? 'text-emerald-400' : 'text-white/20' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                Profil Rumah Sakit
+                            </div>
+                            @if(!$isProfileEnabled)
+                                <span class="text-[8px] bg-white/10 px-2 py-0.5 rounded-full text-white/40 uppercase">Dev</span>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -149,8 +185,39 @@
         </header>
 
         <!-- Main Content Area Area Area Area -->
-        <main class="flex-1 p-6 md:p-10 bg-slate-50">
-            @yield('content')
+        <main class="flex-1 p-6 md:p-10 bg-slate-50 relative">
+            @php
+                $currentRoute = request()->route()->getName();
+                $menuKey = null;
+                if (str_starts_with($currentRoute, 'admin.dashboard')) $menuKey = 'dashboard';
+                elseif (str_starts_with($currentRoute, 'admin.polikliniks')) $menuKey = 'polikliniks';
+                elseif (str_starts_with($currentRoute, 'admin.doctors')) $menuKey = 'doctors';
+                elseif (str_starts_with($currentRoute, 'admin.posts')) $menuKey = 'posts';
+                elseif (str_starts_with($currentRoute, 'admin.pamphlet')) $menuKey = 'pamphlet';
+                elseif (str_starts_with($currentRoute, 'admin.profile')) $menuKey = 'profile';
+
+                $isMenuEnabled = $menuKey ? (\App\Models\Setting::where('key', $menuKey)->where('group', 'Operasional')->first()->value ?? '1') === '1' : true;
+            @endphp
+
+            @if($isMenuEnabled)
+                @yield('content')
+            @else
+                <div class="flex flex-col items-center justify-center min-h-[60vh] text-center">
+                    <div class="w-24 h-24 bg-emerald-100 rounded-3xl flex items-center justify-center mb-6 animate-pulse">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-black text-slate-900 mb-2 italic uppercase">Menu Sedang Dikembangkan</h2>
+                    <p class="text-slate-500 max-w-sm mx-auto text-sm font-medium leading-relaxed">
+                        Mohon maaf, fitur ini sedang dalam tahap optimalisasi oleh tim pengembang untuk memberikan pengalaman terbaik bagi Anda.
+                    </p>
+                    <div class="mt-8">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-emerald-100 rounded-full shadow-sm">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Dev Mode Active</span>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </main>
 
         <footer class="p-8 bg-white border-t border-slate-100 italic">

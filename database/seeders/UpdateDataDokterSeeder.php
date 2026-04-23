@@ -72,7 +72,7 @@ class UpdateDataDokterSeeder extends Seeder
                 ['name' => 'dr. Hermilawaty, Sp. KFR, FIPM (USG), AIFO-K', 'sp' => 'Spesialis Rehab Medik', 'photo' => 'dr. Hermilawaty, Sp. KFR, FIPM (USG), AIFO-K (Dokter Spesialis Rehab Medik).jpeg', 'schedule' => 'Senin - Kamis | 09.00 - Selesai']
             ],
             'Paru' => [
-                ['name' => 'dr. Rivani Nurul Suci, Sp. P', 'sp' => 'Spesialis Paru', 'photo' => 'dr. Rivani Nurul Suci, Sp. P (Dokter Spesialis Paru).jpeg', 'schedule' => 'Senin - Jumat | 16.20 - Selesai'] 
+                ['name' => 'dr. Rivani Nurul Suci, Sp. P', 'sp' => 'Spesialis Paru', 'photo' => 'dr. Rivani Nurul Suci, Sp. P (Dokter Spesialis Paru).jpeg', 'schedule' => 'Senin - Jumat | 16.20 - Selesai']
             ]
         ];
 

@@ -4,9 +4,16 @@
 @php
 $allDoctors = \App\Models\Doctor::where('is_active', true)->with('poliklinik')->get();
 
-// Map specialty text → category
-function doctorCategory(string $sp): string {
-    $s = strtolower($sp);
+// Map doctor → category (Hardened to prevent "non-object" errors)
+function doctorCategory($doctor): string {
+    if (!$doctor) return 'Umum & Lainnya';
+    
+    $s = is_object($doctor) ? strtolower($doctor->specialty ?? '') : strtolower($doctor);
+    $p = (is_object($doctor) && $doctor->poliklinik) ? strtolower($doctor->poliklinik->name ?? '') : '';
+
+    // Priority 1: IGD
+    if (str_contains($s,'igd') || str_contains($p, 'igd')) return 'Dokter Umum IGD';
+    
     if (str_contains($s,'bedah')    || str_contains($s,'orthopedi') || str_contains($s,'orto')     || str_contains($s,'sp.b') || str_contains($s,'sp.ot') || str_contains($s,'b-kbd'))  return 'Spesialis Bedah';
     if (str_contains($s,'dalam')    || str_contains($s,'sp.pd')     || str_contains($s,'finasim'))                                                                                      return 'Spesialis Penyakit Dalam';
     if (str_contains($s,'anak')     || str_contains($s,'sp.a')      || str_contains($s,'obgyn')    || str_contains($s,'sp.og') || str_contains($s,'kandungan'))                         return 'Anak & Kandungan';
@@ -16,17 +23,17 @@ function doctorCategory(string $sp): string {
     if (str_contains($s,'radiolog') || str_contains($s,'sp.rad')    || str_contains($s,'anestesi') || str_contains($s,'sp.an') || str_contains($s,'sp.pk') || str_contains($s,'patolog')) return 'Penunjang & Diagnostik';
     if (str_contains($s,'gigi')     || str_contains($s,'sp.kg')     || str_contains($s,'periodonti') || str_contains($s,'drg.'))                                                        return 'Gigi & Mulut';
     if (str_contains($s,'rehabilit')|| str_contains($s,'fisio'))                                                                                                                        return 'Rehabilitasi Medik';
-    if (str_contains($s,'igd')      || str_contains($s,'umum igd'))                                                                                                                     return 'Dokter Umum IGD';
+    
     return 'Umum & Lainnya';
 }
 
-$categorizedDoctors = $allDoctors->map(fn($d) => tap($d, fn($d) => $d->category = doctorCategory($d->specialty)));
+$categorizedDoctors = $allDoctors->map(fn($d) => tap($d, fn($d) => $d->category = doctorCategory($d)));
 $doctorsByCategory  = $categorizedDoctors->groupBy('category');
 
 $categoryOrder = [
-    'Spesialis Bedah','Spesialis Penyakit Dalam','Anak & Kandungan',
+    'Dokter Umum IGD', 'Spesialis Bedah','Spesialis Penyakit Dalam','Anak & Kandungan',
     'Neurologi & Jiwa','Indera & Kulit','Jantung & Paru',
-    'Penunjang & Diagnostik','Gigi & Mulut','Rehabilitasi Medik', 'Dokter Umum IGD', 'Umum & Lainnya'
+    'Penunjang & Diagnostik','Gigi & Mulut','Rehabilitasi Medik', 'Umum & Lainnya'
 ];
 
 $orderedGroups = collect($categoryOrder)
@@ -34,7 +41,8 @@ $orderedGroups = collect($categoryOrder)
     ->mapWithKeys(fn($c) => [$c => $doctorsByCategory->get($c)]);
 
 $categoryStyle = [
-    'Spesialis Bedah'          => ['dot'=>'bg-red-400',    'badge'=>'bg-red-50 text-red-700 border-red-100',         'bar'=>'bg-red-400'],
+    'Dokter Umum IGD'          => ['dot'=>'bg-red-600',    'badge'=>'bg-red-50 text-red-700 border-red-100',         'bar'=>'bg-red-600', 'pulse' => true],
+    'Spesialis Bedah'          => ['dot'=>'bg-orange-400', 'badge'=>'bg-orange-50 text-orange-700 border-orange-100',   'bar'=>'bg-orange-400'],
     'Spesialis Penyakit Dalam' => ['dot'=>'bg-sky-400',    'badge'=>'bg-sky-50 text-sky-700 border-sky-100',         'bar'=>'bg-sky-400'],
     'Anak & Kandungan'         => ['dot'=>'bg-pink-400',   'badge'=>'bg-pink-50 text-pink-700 border-pink-100',      'bar'=>'bg-pink-400'],
     'Neurologi & Jiwa'         => ['dot'=>'bg-violet-400', 'badge'=>'bg-violet-50 text-violet-700 border-violet-100','bar'=>'bg-violet-400'],
@@ -43,7 +51,6 @@ $categoryStyle = [
     'Penunjang & Diagnostik'   => ['dot'=>'bg-amber-400',  'badge'=>'bg-amber-50 text-amber-700 border-amber-100',   'bar'=>'bg-amber-400'],
     'Gigi & Mulut'             => ['dot'=>'bg-cyan-400',   'badge'=>'bg-cyan-50 text-cyan-700 border-cyan-100',      'bar'=>'bg-cyan-400'],
     'Rehabilitasi Medik'       => ['dot'=>'bg-emerald-400','badge'=>'bg-emerald-50 text-emerald-700 border-emerald-100','bar'=>'bg-emerald-400'],
-    'Dokter Umum IGD'          => ['dot'=>'bg-orange-400', 'badge'=>'bg-orange-50 text-orange-700 border-orange-100','bar'=>'bg-orange-400'],
     'Umum & Lainnya'           => ['dot'=>'bg-gray-400',   'badge'=>'bg-gray-50 text-gray-600 border-gray-200',      'bar'=>'bg-gray-400'],
 ];
 
@@ -51,7 +58,7 @@ $categoryStyle = [
 $alpineDoctors = $allDoctors->map(fn($d) => [
     'name'     => $d->name,
     'specialty'=> $d->specialty,
-    'category' => doctorCategory($d->specialty),
+    'category' => doctorCategory($d),
 ])->values();
 
 $specialties = $allDoctors->pluck('specialty')->unique()->sort()->values();

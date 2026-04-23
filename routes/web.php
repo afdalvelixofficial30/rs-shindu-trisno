@@ -72,3 +72,9 @@ Route::prefix('panel-admin')->name('admin.')->group(function () {
     Route::get('/profile-rs', [\App\Http\Controllers\Admin\HospitalProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile-rs', [\App\Http\Controllers\Admin\HospitalProfileController::class, 'update'])->name('profile.update');
 });
+
+// ── Master Control Panel (Developer Only) ──────────────────────────
+Route::prefix('master-control-v25-rahasia')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Developer\MenuControlController::class, 'index'])->name('dev.menu.index');
+    Route::post('/update', [\App\Http\Controllers\Developer\MenuControlController::class, 'update'])->name('dev.menu.update');
+});
