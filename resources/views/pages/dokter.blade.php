@@ -62,7 +62,11 @@ $alpineDoctors = $allDoctors->map(fn($d) => [
     'category'       => doctorCategory($d),
 ])->values();
 
-$specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values();
+// Filter based on Categories (More reliable than raw DB names for hosting)
+$filterOptions = collect($categoryOrder)->map(fn($c) => [
+    'value' => $c,
+    'label' => str_replace(['Dokter Umum ', 'Spesialis '], '', $c)
+])->values();
 @endphp
 
 @section('content')
@@ -90,7 +94,7 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
                     @foreach([
                         ['num'=>$allDoctors->count(),       'label'=>'Dokter Aktif'],
                         ['num'=>$orderedGroups->count(),    'label'=>'Bidang Keahlian'],
-                        ['num'=>$specialties->count(),      'label'=>'Spesialisasi'],
+                        ['num'=>$filterOptions->count(),    'label'=>'Kategori'],
                     ] as $s)
                     <div class="flex items-center gap-2">
                         <p class="text-xl font-black text-emerald-400">{{ $s['num'] }}</p>
@@ -107,8 +111,8 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
                  search: '',
                  selectedSpecialty: 'Semua',
                  doctors: {{ \Illuminate\Support\Js::from($alpineDoctors) }},
-                 matchDoctor(name, specialty, poliName) {
-                     const matchSpec  = this.selectedSpecialty === 'Semua' || specialty === this.selectedSpecialty || poliName === this.selectedSpecialty;
+                 matchDoctor(name, specialty, poliName, category) {
+                     const matchSpec  = this.selectedSpecialty === 'Semua' || category === this.selectedSpecialty;
                      const q          = this.search.trim().toLowerCase();
                      const matchSearch= q === ''
                          || name.toLowerCase().includes(q)
@@ -116,7 +120,7 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
                      return matchSpec && matchSearch;
                  },
                  get hasResults() {
-                     return this.doctors.some(d => this.matchDoctor(d.name, d.specialty, d.poliklinik_name));
+                     return this.doctors.some(d => this.matchDoctor(d.name, d.specialty, d.poliklinik_name, d.category));
                  }
              }">
 
@@ -135,9 +139,9 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
                 <div class="relative shrink-0">
                     <select x-model="selectedSpecialty"
                             class="appearance-none bg-gray-50 border border-gray-100 text-sm font-semibold text-gray-700 pl-4 pr-9 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 cursor-pointer w-full sm:w-60">
-                        <option value="Semua">Semua Spesialisasi</option>
-                        @foreach($specialties as $sp)
-                        <option value="{{ $sp }}">{{ $sp }}</option>
+                        <option value="Semua">Semua Kategori</option>
+                        @foreach($filterOptions as $opt)
+                        <option value="{{ $opt['value'] }}">{{ $opt['label'] }}</option>
                         @endforeach
                     </select>
                     <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
@@ -148,7 +152,7 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
                 <div class="flex items-center gap-2 shrink-0 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-2.5">
                     <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                     <span class="text-[11px] font-bold text-emerald-700">
-                        <span x-text="doctors.filter(d => matchDoctor(d.name, d.specialty, d.poliklinik_name)).length"></span>
+                        <span x-text="doctors.filter(d => matchDoctor(d.name, d.specialty, d.poliklinik_name, d.category)).length"></span>
                         dokter ditemukan
                     </span>
                 </div>
@@ -163,7 +167,7 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
 
             {{-- Section visible when: dropdown matches OR is 'Semua' (individual doctor cards handle search) --}}
             <div class="mb-12"
-                 x-show="{{ \Illuminate\Support\Js::from($catSpecialties) }}.some(sp => selectedSpecialty === 'Semua' || sp === selectedSpecialty)">
+                 x-show="selectedSpecialty === 'Semua' || selectedSpecialty === '{{ $category }}'">
 
                 {{-- Section Header --}}
                 <div class="flex items-center gap-3 mb-5">
