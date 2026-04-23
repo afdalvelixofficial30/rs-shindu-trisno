@@ -177,7 +177,7 @@ $specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values()
                 {{-- Doctor Cards --}}
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach($docs as $doctor)
-                    <div x-show="matchDoctor('{{ addslashes($doctor->name) }}', '{{ addslashes($doctor->specialty) }}', '{{ addslashes($doctor->poliklinik ? $doctor->poliklinik->name : '-') }}')"
+                    <div x-show="matchDoctor('{{ addslashes($doctor->name) }}', '{{ addslashes($doctor->specialty) }}', '{{ addslashes($doctor->poliklinik ? $doctor->poliklinik->name : '-') }}', '{{ $category }}')"
                          x-transition:enter="transition ease-out duration-150"
                          x-transition:enter-start="opacity-0 scale-95"
                          x-transition:enter-end="opacity-100 scale-100"
