@@ -13,13 +13,30 @@ foreach($polikliniks as $poli) {
 
     foreach($poli->doctors as $doc) {
         $timeStr = strtolower($doc->schedule_text);
-        if (preg_match('/(0[7-9]|10)[:\.]/', $timeStr)) {
+        
+        // Deteksi "Setiap Hari" atau "24 Jam" -> Muncul di semua shift
+        $isEveryday = str_contains($timeStr, 'hari') || str_contains($timeStr, '24');
+        
+        if ($isEveryday) {
             $pagiDocs[] = $doc;
-        } elseif (preg_match('/(1[1-4])[:\.]/', $timeStr)) {
             $siangDocs[] = $doc;
-        } elseif (preg_match('/(1[5-8])[:\.]/', $timeStr)) {
             $soreDocs[] = $doc;
-        } else {
+            continue;
+        }
+
+        // Deteksi Pagi
+        if (preg_match('/(0[7-9]|10)[:\.]/', $timeStr) || str_contains($timeStr, 'pagi')) {
+            $pagiDocs[] = $doc;
+        } 
+        // Deteksi Siang
+        elseif (preg_match('/(1[1-4])[:\.]/', $timeStr) || str_contains($timeStr, 'siang')) {
+            $siangDocs[] = $doc;
+        } 
+        // Deteksi Sore
+        elseif (preg_match('/(1[5-8])[:\.]/', $timeStr) || str_contains($timeStr, 'sore')) {
+            $soreDocs[] = $doc;
+        } 
+        else {
             // Default ke pagi kalau sulit di-parsing atau kosong
             $pagiDocs[] = $doc; 
         }
