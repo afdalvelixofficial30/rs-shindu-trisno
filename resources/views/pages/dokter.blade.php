@@ -56,12 +56,13 @@ $categoryStyle = [
 
 // Alpine data — only what JS needs
 $alpineDoctors = $allDoctors->map(fn($d) => [
-    'name'     => $d->name,
-    'specialty'=> $d->specialty,
-    'category' => doctorCategory($d),
+    'name'           => $d->name,
+    'specialty'      => $d->specialty,
+    'poliklinik_name'=> $d->poliklinik ? $d->poliklinik->name : '-',
+    'category'       => doctorCategory($d),
 ])->values();
 
-$specialties = $allDoctors->pluck('specialty')->unique()->sort()->values();
+$specialties = \App\Models\Poliklinik::pluck('name')->unique()->sort()->values();
 @endphp
 
 @section('content')
@@ -106,8 +107,8 @@ $specialties = $allDoctors->pluck('specialty')->unique()->sort()->values();
                  search: '',
                  selectedSpecialty: 'Semua',
                  doctors: {{ \Illuminate\Support\Js::from($alpineDoctors) }},
-                 matchDoctor(name, specialty) {
-                     const matchSpec  = this.selectedSpecialty === 'Semua' || specialty === this.selectedSpecialty;
+                 matchDoctor(name, specialty, poliName) {
+                     const matchSpec  = this.selectedSpecialty === 'Semua' || specialty === this.selectedSpecialty || poliName === this.selectedSpecialty;
                      const q          = this.search.trim().toLowerCase();
                      const matchSearch= q === ''
                          || name.toLowerCase().includes(q)
@@ -115,7 +116,7 @@ $specialties = $allDoctors->pluck('specialty')->unique()->sort()->values();
                      return matchSpec && matchSearch;
                  },
                  get hasResults() {
-                     return this.doctors.some(d => this.matchDoctor(d.name, d.specialty));
+                     return this.doctors.some(d => this.matchDoctor(d.name, d.specialty, d.poliklinik_name));
                  }
              }">
 
@@ -147,7 +148,7 @@ $specialties = $allDoctors->pluck('specialty')->unique()->sort()->values();
                 <div class="flex items-center gap-2 shrink-0 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-2.5">
                     <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                     <span class="text-[11px] font-bold text-emerald-700">
-                        <span x-text="doctors.filter(d => matchDoctor(d.name, d.specialty)).length"></span>
+                        <span x-text="doctors.filter(d => matchDoctor(d.name, d.specialty, d.poliklinik_name)).length"></span>
                         dokter ditemukan
                     </span>
                 </div>
@@ -176,7 +177,7 @@ $specialties = $allDoctors->pluck('specialty')->unique()->sort()->values();
                 {{-- Doctor Cards --}}
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach($docs as $doctor)
-                    <div x-show="matchDoctor('{{ addslashes($doctor->name) }}', '{{ addslashes($doctor->specialty) }}')"
+                    <div x-show="matchDoctor('{{ addslashes($doctor->name) }}', '{{ addslashes($doctor->specialty) }}', '{{ addslashes($doctor->poliklinik ? $doctor->poliklinik->name : '-') }}')"
                          x-transition:enter="transition ease-out duration-150"
                          x-transition:enter-start="opacity-0 scale-95"
                          x-transition:enter-end="opacity-100 scale-100"
