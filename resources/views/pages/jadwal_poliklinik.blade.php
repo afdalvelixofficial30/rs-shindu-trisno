@@ -7,6 +7,11 @@ $polikliniksList = [];
 foreach($polikliniks as $poli) {
     if ($poli->doctors->isEmpty()) continue;
     
+    // EXCLUDE IGD: IGD tidak dimasukkan dalam jadwal poliklinik (Rawat Jalan)
+    if (str_contains(strtolower($poli->name), 'igd')) {
+        continue;
+    }
+    
     $pagiDocs = [];
     $siangDocs = [];
     $soreDocs = [];
@@ -14,31 +19,19 @@ foreach($polikliniks as $poli) {
     foreach($poli->doctors as $doc) {
         $timeStr = strtolower($doc->schedule_text);
         
-        // Deteksi "Setiap Hari" atau "24 Jam" -> Muncul di semua shift
-        $isEveryday = str_contains($timeStr, 'hari') || str_contains($timeStr, '24');
-        
-        if ($isEveryday) {
-            $pagiDocs[] = $doc;
-            $siangDocs[] = $doc;
-            $soreDocs[] = $doc;
-            continue;
-        }
-
         // Deteksi Pagi
-        if (preg_match('/(0[7-9]|10)[:\.]/', $timeStr) || str_contains($timeStr, 'pagi')) {
+        if (preg_match('/(0[7-9]|10)[:\.]/', $timeStr) || str_contains($timeStr, 'pagi') || str_contains($timeStr, 'hari')) {
             $pagiDocs[] = $doc;
         } 
+        
         // Deteksi Siang
-        elseif (preg_match('/(1[1-4])[:\.]/', $timeStr) || str_contains($timeStr, 'siang')) {
+        if (preg_match('/(1[1-4])[:\.]/', $timeStr) || str_contains($timeStr, 'siang') || str_contains($timeStr, 'hari')) {
             $siangDocs[] = $doc;
         } 
+        
         // Deteksi Sore
-        elseif (preg_match('/(1[5-8])[:\.]/', $timeStr) || str_contains($timeStr, 'sore')) {
+        if (preg_match('/(1[5-8])[:\.]/', $timeStr) || str_contains($timeStr, 'sore') || str_contains($timeStr, 'hari')) {
             $soreDocs[] = $doc;
-        } 
-        else {
-            // Default ke pagi kalau sulit di-parsing atau kosong
-            $pagiDocs[] = $doc; 
         }
     }
 
@@ -55,7 +48,7 @@ foreach($polikliniks as $poli) {
     }
 }
 
-// Prepare flat array for Alpine: only name & shift needed for filter detection
+// Prepare flat array for Alpine
 $clinicsForAlpine = array_map(fn($p) => [
     'name' => $p['name'], 
     'shift' => $p['shift'],
