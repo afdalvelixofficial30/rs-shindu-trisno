@@ -21,3 +21,10 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Data & Build Assets (Ignored for code-only sync)
+/public/assets/images/doctors/*
+/public/assets/images/jadwal/*
+/public/build/
+!/public/assets/images/doctors/.gitkeep
+!/public/assets/images/jadwal/.gitkeep
