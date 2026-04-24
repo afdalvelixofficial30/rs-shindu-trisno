@@ -11,12 +11,13 @@ class MenuControlController extends Controller
     public function index()
     {
         $menus = [
-            'dashboard' => 'Dashboard Utama',
-            'polikliniks' => 'Daftar Poliklinik',
-            'doctors' => 'Dokter Spesialis',
-            'posts' => 'Berita & Artikel',
-            'pamphlet' => 'Pop-Up Jadwal (Pamflet)',
-            'profile' => 'Profil Rumah Sakit',
+            ['key' => 'public.home', 'label' => 'Website Utama (Landing Page)', 'route' => 'home'],
+            ['key' => 'dashboard', 'label' => 'Dashboard Utama', 'route' => 'admin.dashboard.index'],
+            ['key' => 'polikliniks', 'label' => 'Daftar Poliklinik', 'route' => 'admin.polikliniks.index'],
+            ['key' => 'doctors', 'label' => 'Dokter Spesialis', 'route' => 'admin.doctors.index'],
+            ['key' => 'posts', 'label' => 'Berita & Artikel', 'route' => 'admin.posts.index'],
+            ['key' => 'pamphlet', 'label' => 'Pop-Up Jadwal (Pamflet)', 'route' => 'admin.pamphlet.index'],
+            ['key' => 'profile', 'label' => 'Profil Rumah Sakit', 'route' => 'admin.profile.index'],
         ];
 
         $statuses = Setting::where('group', 'Operasional')->pluck('value', 'key');

@@ -26,15 +26,18 @@
         </header>
 
         <div class="grid gap-6">
-            @foreach($menus as $key => $label)
-            @php $isActive = ($statuses[$key] ?? '1') === '1'; @endphp
+            @foreach($menus as $menu)
+            @php 
+                $key = $menu['key'];
+                $isActive = ($statuses[$key] ?? '1') === '1'; 
+            @endphp
             <div x-data="{ active: {{ $isActive ? 'true' : 'false' }} }" 
                  class="bg-[#111114] border border-white/5 p-6 rounded-2xl flex items-center justify-between hover:border-indigo-500/30 transition-all duration-300">
                 <div class="flex items-center gap-6">
                     <div class="w-2 h-2 rounded-full" :class="active ? 'bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.5)]' : 'bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.5)]'"></div>
                     <div>
-                        <h2 class="text-white font-bold">{{ $label }}</h2>
-                        <p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Key: admin.{{ $key }}.index</p>
+                        <h2 class="text-white font-bold">{{ $menu['label'] }}</h2>
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Key: {{ $key }}</p>
                     </div>
                 </div>
 
